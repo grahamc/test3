@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to publish to FlakeHub"
+        description: "The existing tag to publish to FlakeHub"
         type: "string"
         required: true
 jobs:
-  publish:
+  flakehub-publish:
     runs-on: "ubuntu-latest"
     permissions:
       id-token: "write"
