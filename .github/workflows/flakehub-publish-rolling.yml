@@ -15,4 +15,5 @@ jobs:
       - uses: "DeterminateSystems/flakehub-push@main"
         with:
           rolling: true
+          name: grahamc/test3
           visibility: "unlisted"
