@@ -42,4 +42,4 @@ jobs:
                 process.exit();
             }
       - run: "echo ${{ steps.split.outputs.minorVersion }}"
-        if: steps.split.outputs.minorVersionzz
+        if: steps.split.outputs.minorVersion
