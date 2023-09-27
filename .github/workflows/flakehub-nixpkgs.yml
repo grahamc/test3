@@ -1,4 +1,4 @@
-name: "Publish releases to FlakeHub"
+name: "Publish every Git push to NixOS release branches to FlakeHub. nixos-unstable is 0.1.x, and nixos-yy.mm is 0.yymm.x."
 on:
   push:
     branches:
@@ -14,7 +14,6 @@ jobs:
       - uses: actions/github-script@v6
         id: split
         with:
-
           script: |
             "use strict";
             const ref = context.ref;
@@ -41,5 +40,14 @@ jobs:
                 console.log(`Branch didn't match our publishable regex.`);
                 process.exit();
             }
-      - run: "echo ${{ steps.split.outputs.minorVersion }}"
+      - uses: "actions/checkout@v3"
         if: steps.split.outputs.minorVersion
+      - uses: "DeterminateSystems/nix-installer-action@main"
+        if: steps.split.outputs.minorVersion
+      - uses: "DeterminateSystems/flakehub-push@main"
+        if: steps.split.outputs.minorVersion
+        with:
+          name: "NixOS/nixpkgs"
+          rolling: true
+          visibility: "public"
+          rolling-minor: "${{ steps.split.outputs.minorVersion }}"
