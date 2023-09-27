@@ -14,6 +14,7 @@ jobs:
       - uses: actions/github-script@v6
         id: split
         with:
+            
           script: |
             "use strict";
             const ref = context.ref;
