@@ -14,7 +14,7 @@ jobs:
       - uses: actions/github-script@v6
         id: split
         with:
-            
+
           script: |
             "use strict";
             const ref = context.ref;
@@ -39,5 +39,7 @@ jobs:
             }
             else {
                 console.log(`Branch didn't match our publishable regex.`);
-                process.exit(1);
+                process.exit();
             }
+      - run: "echo ${{ steps.split.outputs.minorVersion }}"
+        if: steps.split.outputs.minorVersionzz
