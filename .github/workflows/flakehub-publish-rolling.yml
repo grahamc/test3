@@ -6,9 +6,6 @@ on:
 jobs:
   flakehub-publish:
     runs-on: "ubuntu-latest"
-    permissions:
-      id-token: "write"
-      contents: "read"
     steps:
       - uses: "actions/checkout@v3"
       - uses: "DeterminateSystems/nix-installer-action@main"
