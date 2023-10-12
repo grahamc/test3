@@ -11,6 +11,7 @@ jobs:
       - uses: "DeterminateSystems/nix-installer-action@main"
         with:
           flakehub: true
+      - run: nix show-config
       - uses: "DeterminateSystems/flakehub-push@main"
         with:
           rolling: true
