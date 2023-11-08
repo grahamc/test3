@@ -1,0 +1,11 @@
+name: "check install hash"
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "DeterminateSystems/nix-installer-action@main"
+      - run: cat /etc/nix/nix.conf
+      - run: sha256sum /etc/nix/nix.conf
