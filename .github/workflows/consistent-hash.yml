@@ -4,6 +4,19 @@ on:
 
 jobs:
   check:
+    strategy:
+      matrix:
+        repo:
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
+          - 1
     runs-on: "ubuntu-latest"
     steps:
       - uses: "DeterminateSystems/nix-installer-action@main"
