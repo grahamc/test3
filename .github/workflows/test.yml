@@ -1,0 +1,24 @@
+name: vm
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          flakehub: true
+      - name: Enable KVM group perms
+        run: |
+            set -x
+            echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+            sudo udevadm control --reload-rules
+            sudo udevadm trigger --name-match=kvm
+      - run: |
+            nix-build -I nixos-config=configuration.nix '<nixpkgs/nixos>' -A vm
