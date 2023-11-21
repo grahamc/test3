@@ -1,4 +1,6 @@
-name: vm
+
+
+name: Run NixOS Tests and other VMs on GitHub Actions.
 on:
   pull_request:
   workflow_dispatch:
@@ -6,11 +8,9 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
-      - uses: actions/checkout@v3.3.0
-      - uses: DeterminateSystems/nix-installer-action@kvm
+      - uses: actions/checkout@v4.1.1
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
       - run: |
-            nix-build '<nixpkgs/nixos/tests/doas.nix>'
+            nix-build '<nixpkgs/nixos/tests/minio.nix>' 
