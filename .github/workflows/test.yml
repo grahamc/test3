@@ -16,6 +16,8 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           flakehub: true
-      - uses: DeterminateSystems/magic-nix-cache-action@flakehub-cache
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          source-url: https://install.determinate.systems/magic-nix-cache-priv/branch/main/X64-Linux
       - run: |
             nix build "https://flakehub.com/f/DeterminateSystems/fh/0.1.9.tar.gz"
