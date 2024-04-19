@@ -1,4 +1,4 @@
-name: Context testing
+name: GitHub Script
 on:
   push:
   pull_request:
